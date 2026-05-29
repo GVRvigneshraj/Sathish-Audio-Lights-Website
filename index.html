@@ -305,9 +305,18 @@
         .footer-copy { font-size: 12px; color: rgba(255, 255, 255, 0.3); } .footer-copy span { color: var(--p1); transition: color 0.4s; }
 
         /* ========== THEME SWITCHER ========== */
-        .theme-switcher { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 99999; display: flex; flex-direction: column; align-items: center;  background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 14px 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: auto; }
-        .theme-switcher.minimized { padding: 10px 8px; }
-        .ts-toggle { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; margin-bottom: 4px; transition: transform 0.3s; padding: 4px; }
+        .theme-switcher { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 99999; display: flex; flex-direction: column; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 14px 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: auto; }
+        
+        /* FIX: Tight fit when minimized to remove large black background */
+        .theme-switcher.minimized { 
+            padding: 6px; 
+            gap: 0; 
+        }
+        .theme-switcher.minimized .ts-toggle { 
+            margin-bottom: 0; 
+        }
+        
+        .ts-toggle { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; margin-bottom: 4px; transition: transform 0.3s, margin 0.35s; padding: 4px; }
         .ts-toggle:hover { transform: scale(1.2); }
         .ts-content { display: flex; flex-direction: column; align-items: center; gap: 10px; transition: all 0.35s; overflow: hidden; max-height: 400px; opacity: 1; }
         .theme-switcher.minimized .ts-content { max-height: 0; opacity: 0; margin: 0; padding: 0; gap: 0; }
@@ -367,7 +376,7 @@
         /* ========== RESPONSIVE - MOBILE ========== */
         @media(max-width:768px) {
             .nav-links, .nav-phone { display: none; }
-            .quote-btn { display: none; } /* Hidden on mobile to prevent overflow, moved to mobile menu */
+            .quote-btn { display: none; } 
             .hamburger { display: flex; }
             .hero-inner { padding: 90px 16px 50px; }
             .hero-content { padding: 28px 20px; }
@@ -385,8 +394,9 @@
             .c-card { max-width: 400px; margin-left: auto; margin-right: auto; }
             .contact-form { max-width: 450px; margin: 0 auto; }
             
-            /* Fix floating elements out of screen on mobile */
             .theme-switcher { right: 8px; padding: 10px 7px; gap: 8px; }
+            /* FIX: Tight fit on mobile when minimized */
+            .theme-switcher.minimized { padding: 5px; gap: 0; } 
             .t-dot { width: 24px; height: 24px; }
             .ts-toggle { font-size: 16px; }
             .t-dot::after { display: none; } 
@@ -397,7 +407,7 @@
 
         /* ========== RESPONSIVE - SMALL MOBILE ========== */
         @media(max-width:480px) {
-            .nav-inner { padding: 0 12px; } /* Tighter padding to ensure menu fits */
+            .nav-inner { padding: 0 12px; } 
             .hero-main { font-size: 28px !important; }
             .hero-script { font-size: 32px !important; }
             .hero-sub { font-size: 12px; letter-spacing: 2px; }
@@ -471,7 +481,6 @@
         <a class="m-link" href="#equipment" onclick="toggleMobile()"><i class="fa-solid fa-sliders"></i>Equipment</a>
         <a class="m-link" href="#gallery" onclick="toggleMobile()"><i class="fa-solid fa-images"></i>Gallery</a>
         <a class="m-link" href="#contact" onclick="toggleMobile()"><i class="fa-solid fa-envelope"></i>Contact Us</a>
-        <!-- Added Quote button inside mobile menu -->
         <button class="quote-btn m-quote" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); toggleMobile();"><i class="fa-solid fa-bolt"></i>Get a Quote</button>
     </div>
 
